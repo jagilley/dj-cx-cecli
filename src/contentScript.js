@@ -1,5 +1,12 @@
 'use strict';
 
+const bad_element_types = [
+  "file",
+  "hidden",
+  "radio",
+  "checkbox",
+]
+
 // Function to fill out the form
 function fillForm() {
   chrome.storage.local.get('resumeText', function(data) {
@@ -15,10 +22,10 @@ function fillForm() {
 
       // Iterate through the elements and use GPT-3.5 API to determine the appropriate value
       inputElements.forEach((element) => {
-        // if type of input is file, skip
-        if (element.type === "file") return;
-        // if input is hidden, skip
-        if (element.type === "hidden") return;
+        // if type of element is in bad_element_types, skip
+        if (bad_element_types.includes(element.type)) {
+          return;
+        }
         const elementType = element.tagName.toLowerCase();
         const fieldName = element.name || element.id || element.placeholder;
         console.log(fieldName);
@@ -28,7 +35,7 @@ function fillForm() {
         while (label && label.tagName.toLowerCase() !== "label") {
           label = label.parentElement;
         }
-        console.log(label);
+        // console.log(label);
         // if we found a label, use its text as the field name
         let fieldNameRich = "";
         if (label) {
@@ -47,11 +54,11 @@ function fillForm() {
           // remove trailing commas
           const tcRegex = /\,(?!\s*?[\{\[\"\'\w])/g;
           const svnocommas = suggestedValue.replace(tcRegex, '');
+          console.log(fieldNameRich);
           console.log(svnocommas);
           // process JSON response, removing any trailing commas
           const suggestedValueJson = JSON.parse(svnocommas);
           const value = suggestedValueJson.field_completion;
-          console.log(value);
           // Fill the form
           if (elementType === "input") {
             element.value = value;
