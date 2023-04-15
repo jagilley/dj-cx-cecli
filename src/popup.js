@@ -26,6 +26,7 @@ fileInput.addEventListener('change', function() {
 
 readButton.addEventListener('click', function() {
   const selectedFile = fileInput.files[0];
+  chrome.storage.local.set({ 'resumePath': selectedFile.path })
   const reader = new FileReader();
 
   reader.onload = function() {

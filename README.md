@@ -3,6 +3,7 @@
 ## Install instructions for debugging
 
 1. Clone this repo
+1. Navigate to the repo that you just cloned
 1. `npm install -g chrome-extension-cli`
 1. `npm run build`
 1. Go to Chrome/Brave's extensions page, enable dev mode, and then click "load unpacked".
