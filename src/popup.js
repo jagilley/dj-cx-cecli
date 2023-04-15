@@ -18,38 +18,34 @@ const outputDiv = document.getElementById('output');
 fileInput.addEventListener('change', function() {
   const selectedFile = fileInput.files[0];
   if (selectedFile && selectedFile.type === 'application/pdf') {
-    readButton.disabled = false;
-  } else {
-    readButton.disabled = true;
-  }
-});
+    chrome.storage.local.set({ 'resumePath': selectedFile.path })
+    const reader = new FileReader();
 
-readButton.addEventListener('click', function() {
-  const selectedFile = fileInput.files[0];
-  chrome.storage.local.set({ 'resumePath': selectedFile.path })
-  const reader = new FileReader();
-
-  reader.onload = function() {
-    const typedArray = new Uint8Array(this.result);
-    pdfjsLib.getDocument(typedArray).promise.then(function(pdf) {
-      let textContent = '';
-      pdf.getPage(1).then(function(page) {
-        page.getTextContent().then(function(content) {
-          content.items.forEach(function(item) {
-            textContent += item.str + ' ';
+    reader.onload = function() {
+      const typedArray = new Uint8Array(this.result);
+      pdfjsLib.getDocument(typedArray).promise.then(function(pdf) {
+        let textContent = '';
+        pdf.getPage(1).then(function(page) {
+          page.getTextContent().then(function(content) {
+            content.items.forEach(function(item) {
+              textContent += item.str + ' ';
+            });
+            chrome.storage.local.set({ 'resumeText': textContent });
+            let current_time_string = new Date().toLocaleString();
+            chrome.storage.local.set({ 'resumeTime': current_time_string })
+            outputDiv.textContent = 'Resume successfully processed at ' + current_time_string;
           });
-          outputDiv.textContent = textContent;
-          chrome.storage.local.set({ 'resumeText': textContent });
         });
       });
-    });
+    };
+    reader.readAsArrayBuffer(selectedFile);
+  } else {
+    outputDiv.textContent = 'Please select a PDF file.';
   };
-
-  reader.readAsArrayBuffer(selectedFile);
 });
 
-chrome.storage.local.get('resumeText', function(data) {
-  if (data.resumeText) {
-    outputDiv.textContent = data.resumeText;
+chrome.storage.local.get('resumeTime', function(data) {
+  if (data.resumeTime) {
+    outputDiv.textContent = 'Resume last processed at ' + data.resumeTime;
   }
 });
