@@ -20,6 +20,22 @@ function fillForm() {
       // Get all input and textarea elements on the page
       const inputElements = document.querySelectorAll("input, textarea");
 
+      // replace this code with https://stackoverflow.com/questions/11325415/access-iframe-content-from-a-chromes-extension-content-script
+      // const iframeElements = document.querySelectorAll("iframe");
+
+      // for (let i = 0; i < iframeElements.length; i++) {
+      //   const iframe = iframeElements[i];
+      //   const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+      //   const iframeInputElements = iframeDoc.querySelectorAll("input, textarea");
+      //   Array.prototype.push.apply(inputElements, iframeInputElements);
+      // }
+
+      // if no input elements, raise error
+      if (!inputElements) {
+        console.log("No input elements found");
+        return;
+      }
+
       // Iterate through the elements and use GPT-3.5 API to determine the appropriate value
       inputElements.forEach((element) => {
         // if type of element is in bad_element_types, skip

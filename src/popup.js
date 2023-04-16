@@ -12,7 +12,6 @@ document.getElementById("fillFormButton").addEventListener("click", () => {
 });
 
 const fileInput = document.getElementById('file-input');
-const readButton = document.getElementById('read-button');
 const outputDiv = document.getElementById('output');
 
 fileInput.addEventListener('change', function() {
