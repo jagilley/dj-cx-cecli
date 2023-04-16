@@ -1,0 +1,83 @@
+
+/* Main container */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 300px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Header */
+.header {
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  background-color: #3498db;
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  position: relative;
+  border-radius: 10px 10px 0 0;
+}
+
+/* Header animation */
+#fillFormButton {
+  position: relative;
+  z-index: 1;
+}
+#fillFormButton::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0%;
+  height: 4px;
+  background-color: #1abc9c;
+  transform: translateX(-50%);
+  transition: width 0.3s ease-in-out;
+  z-index: -1;
+}
+#fillFormButton:hover::before {
+  width: 100%;
+}
+
+/* Form */
+form {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Input */
+input[type="file"] {
+  margin-bottom: 20px;
+}
+
+/* Button */
+button {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+button:hover {
+  background-color: #2980b9;
+}
+
+/* Output */
+#output {
+  margin-top: 20px;
+}

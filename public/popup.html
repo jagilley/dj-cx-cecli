@@ -1,21 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <style>
-      body {
-        width: 300px;
-        height: 100px;
-      }
-      button {
-        margin: 30px;
-      }
-    </style>
+    <link rel="stylesheet" href="popup.css">
   </head>
   <body>
-    <h3>Fill Job Application</h3>
-    <input type="file" id="file-input">
-    <div id="output"></div>
-    <button id="fillFormButton">Fill Job Application</button>
+    <div class="container">
+      <div class="header">Fill Job Application</div>
+      <form>
+        <input type="file" id="file-input">
+        <div id="output"></div>
+        <button id="fillFormButton">Fill Job Application</button>
+      </form>
+    </div>
     <script src="popup.js" type="module"></script>
   </body>
 </html>
