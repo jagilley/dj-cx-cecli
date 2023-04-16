@@ -32,6 +32,10 @@ function fillForm() {
         if (bad_element_types.includes(element.type)) {
           return;
         }
+        // if element style includes display: none, skip
+        if (element.style.display === "none") {
+          return;
+        }
         const elementType = element.tagName.toLowerCase();
         const fieldName = element.name || element.id || element.placeholder;
         console.log(fieldName);
