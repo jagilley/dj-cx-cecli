@@ -67,3 +67,17 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return true; // Required for async response
   }
 });
+
+chrome.webRequest.onCompleted.addListener(
+  (details) => {
+    chrome.tabs.executeScript(details.tabId, {
+      file: 'contentScript.js',
+      frameId: details.frameId,
+      runAt: 'document_idle',
+    });
+  },
+  {
+    urls: ['<all_urls>'],
+    types: ['sub_frame'],
+  }
+);
