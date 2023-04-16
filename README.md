@@ -8,3 +8,7 @@
 1. `npm run build`
 1. Go to Chrome/Brave's extensions page, enable dev mode, and then click "load unpacked".
 1. Navigate to the `build` folder you just created, and select it. You should be good to go!
+
+## TODO
+- [ ] add more robust logic for multiple choice selections
+- [ ] maybe pass each element/div to the LLM and have it infer the intent?
