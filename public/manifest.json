@@ -20,11 +20,10 @@
     "storage",
     "fileSystem",
     "webRequest",
-    "webRequestBlocking",
-    "<all_urls>"
+    "webRequestBlocking"
   ],
   "host_permissions": [
-    "activeTab", "storage", "https://api.openai.com/", "tabs", "https://*.supabase.co", "fileSystem", "https://cdnjs.cloudflare.com", "http://cdnjs.cloudflare.com", "https://mozilla.github.io"
+    "https://api.openai.com/", "https://cdnjs.cloudflare.com", "http://cdnjs.cloudflare.com", "https://mozilla.github.io"
   ],
   "content_scripts": [
     {
